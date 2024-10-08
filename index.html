@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aniversário da Jane</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(to right, #4a90e2, #50e3c2);
+            font-family: 'Roboto', sans-serif;
+            color: #fff;
+            text-align: center;
+        }
+        .countdown-container {
+            background: rgba(0, 0, 0, 0.6);
+            padding: 2rem 3rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .countdown {
+            font-size: 2.5rem;
+            font-weight: bold;
+        }
+        .countdown span {
+            display: block;
+            margin: 0.5rem 0;
+        }
+        .label {
+            font-size: 1rem;
+            font-weight: normal;
+            text-transform: uppercase;
+            color: #f0f0f0;
+        }
+        h1 {
+            margin-bottom: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="countdown-container">
+        <h1>Aniversário da Jane</h1>
+        <div class="countdown" id="countdown">
+            Carregando contagem regressiva...
+        </div>
+    </div>
+
+    <script>
+        function updateCountdown() {
+            const targetDate = new Date('2024-11-15T00:00:00'); // Data alvo
+            const now = new Date();
+            const timeDifference = targetDate - now;
+
+            if (timeDifference <= 0) {
+                document.getElementById('countdown').innerHTML = '<span class="label">A data chegou!</span>';
+                return;
+            }
+
+            const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+
+            document.getElementById('countdown').innerHTML = `
+                <span>${days} <span class="label">dias</span></span>
+                <span>${hours} <span class="label">horas</span></span>
+                <span>${minutes} <span class="label">minutos</span></span>
+                <span>${seconds} <span class="label">segundos</span></span>
+            `;
+        }
+
+        // Atualiza a contagem regressiva a cada segundo
+        setInterval(updateCountdown, 1000);
+
+        // Atualiza imediatamente na carga da página
+        updateCountdown();
+    </script>
+</body>
+</html>
